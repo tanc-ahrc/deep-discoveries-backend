@@ -1,2 +1,3 @@
 # deep-discoveries-backend
-TBC
+
+Backend web app and search engine service that supports the Deep Discoveries frontend

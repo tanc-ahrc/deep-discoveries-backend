@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-quiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Deep Discovery - Visual Search API</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<style type="text/css">
+			.main-content {
+				padding: 40px 15px;
+				text-align: center;
+			}
+
+			form {
+				text-align: left;
+			}
+
+			.image-rank {
+				vertical-align: top;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="main-content">
+				<h1>Deep Discovery - Visual Search API</h1>
+				<form action="https://decade.ac.uk/deepdiscovery/" method="POST" enctype="multipart/form-data" encoding="multipart/form-data">
+					<div class="form-group">
+						<p class="help-block">Specify your query image</p>
+						<label for="inputFile">File input (optional)</label>
+						<input type="file" id="inputFile" name="query_file">
+					</div>
+                                        <label>URL input (optional)</label>
+                                        <input type="text" name="query_url" id="query_url" value="">
+					</br>
+
+                                        <label>Asset ID (optional)</label>
+                                        <input type="text" name="query_aid" id="query_aid" value="">
+					</br>
+					<hr/>
+                                        <label>Search Engine</label>
+                                        <div class="radio">
+                                                <label>
+                                                        <input type="radio" name="searchengine" id="Style" value="Style" checked>
+                                                        Style Similarity
+                                                </label>
+                                        </div>
+                                        <div class="radio">
+                                                <label>
+                                                        <input type="radio" name="searchengine" id="Semantic" value="Semantic">
+                                                        Semantic Similarity
+                                                </label>
+                                        </div>
+                                        <div class="radio">
+                                                <label>
+                                                        <input type="radio" name="searchengine" id="Random" value="Random">
+                                                        Randomly Sample (ignores any query input)
+                                                </label>
+                                        </div>
+					<hr/>
+                                        <label>Required number of results</label>
+                                        <input type="text" name="resultcount" id="resultcount" value="50">
+					</br>
+					<hr/>
+					<button type="submit" class="btn btn-default">Submit</button>
+					</br>
+				</form>
+			</div>
+			{% if results %}
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<ul class="list-inline">
+							{% for result in resultset %}
+								<li><span class="image-rank">Rank: {{ loop.index }}<br/>{{ result.collection }}</span> 
+<img src="{{ result.url }}" class="img-thumbnail img-responsive" />
+<img src="{{ result.heatmapurl }}" class="img-thumbnail img-responsive" /></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</body>
+</html>
+
